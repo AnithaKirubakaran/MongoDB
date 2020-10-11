@@ -1,0 +1,156 @@
+MongoDB:
+
+There is no concept of relationship
+NoSQL database is Non-relational database
+performance: MongoDB collection is used
+stores data in the form of document
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Microsoft Windows [Version 10.0.18362.1016]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+C:\Program Files\MongoDB\Server\4.4\bin>mongo.exe
+MongoDB shell version v4.4.1
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("c1341ccc-ecf8-4f00-a495-a9ec21f76cd3") }
+MongoDB server version: 4.4.1
+---
+The server generated these startup warnings when booting:
+        2020-09-10T13:22:19.694+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+testdb  0.000GB
+> use testdb
+switched to db testdb
+> show collections
+user
+> db.user.find()
+{ "_id" : ObjectId("5f59f28f0b60a419bd5db69d"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:31:59.124Z") }
+{ "_id" : ObjectId("5f59f335ad8ab66785921e6d"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:34:45.147Z") }
+{ "_id" : ObjectId("5f59f3c3cf5106033ac48d74"), "name" : "abc", "age" : 10, "createdDate" : ISODate("1970-01-01T00:00:00Z") }
+{ "_id" : ObjectId("5f59f3e81847e4421cadc8f7"), "name" : "def", "age" : 10, "createdDate" : ISODate("2020-09-10T09:37:44.115Z") }
+> db.user.remove()
+uncaught exception: Error: remove needs a query :
+DBCollection.prototype._parseRemove@src/mongo/shell/collection.js:362:15
+DBCollection.prototype.remove@src/mongo/shell/collection.js:389:18
+@(shell):1:1
+> db.user.find()
+{ "_id" : ObjectId("5f59f28f0b60a419bd5db69d"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:31:59.124Z") }
+{ "_id" : ObjectId("5f59f335ad8ab66785921e6d"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:34:45.147Z") }
+{ "_id" : ObjectId("5f59f3c3cf5106033ac48d74"), "name" : "abc", "age" : 10, "createdDate" : ISODate("1970-01-01T00:00:00Z") }
+{ "_id" : ObjectId("5f59f3e81847e4421cadc8f7"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:37:44.115Z") }
+{ "_id" : ObjectId("5f59f5372753d92df6e3ed08"), "name" : "def", "age" : 10, "createdDate" : ISODate("2020-09-10T09:43:19.945Z") }
+> db.user.remove({type:"def,K"}, 1)
+WriteResult({ "nRemoved" : 0 })
+> db.user.find()
+{ "_id" : ObjectId("5f59f28f0b60a419bd5db69d"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:31:59.124Z") }
+{ "_id" : ObjectId("5f59f335ad8ab66785921e6d"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:34:45.147Z") }
+{ "_id" : ObjectId("5f59f3c3cf5106033ac48d74"), "name" : "abc", "age" : 10, "createdDate" : ISODate("1970-01-01T00:00:00Z") }
+{ "_id" : ObjectId("5f59f3e81847e4421cadc8f7"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:37:44.115Z") }
+{ "_id" : ObjectId("5f59f5372753d92df6e3ed08"), "name" : "def", "age" : 10, "createdDate" : ISODate("2020-09-10T09:43:19.945Z") }
+> db.user.remove({type:"abc"},1)
+WriteResult({ "nRemoved" : 0 })
+> db.user.find()
+{ "_id" : ObjectId("5f59f28f0b60a419bd5db69d"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:31:59.124Z") }
+{ "_id" : ObjectId("5f59f335ad8ab66785921e6d"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:34:45.147Z") }
+{ "_id" : ObjectId("5f59f3c3cf5106033ac48d74"), "name" : "abc", "age" : 10, "createdDate" : ISODate("1970-01-01T00:00:00Z") }
+{ "_id" : ObjectId("5f59f3e81847e4421cadc8f7"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:37:44.115Z") }
+{ "_id" : ObjectId("5f59f5372753d92df6e3ed08"), "name" : "def", "age" : 10, "createdDate" : ISODate("2020-09-10T09:43:19.945Z") }
+> db.user.remove({type:"abc"}, 1)
+WriteResult({ "nRemoved" : 0 })
+> db.user.remove({type:"abc"})
+WriteResult({ "nRemoved" : 0 })
+> db.user.find()
+{ "_id" : ObjectId("5f59f28f0b60a419bd5db69d"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:31:59.124Z") }
+{ "_id" : ObjectId("5f59f335ad8ab66785921e6d"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:34:45.147Z") }
+{ "_id" : ObjectId("5f59f3c3cf5106033ac48d74"), "name" : "abc", "age" : 10, "createdDate" : ISODate("1970-01-01T00:00:00Z") }
+{ "_id" : ObjectId("5f59f3e81847e4421cadc8f7"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:37:44.115Z") }
+{ "_id" : ObjectId("5f59f5372753d92df6e3ed08"), "name" : "def", "age" : 10, "createdDate" : ISODate("2020-09-10T09:43:19.945Z") }
+> db.user.remove({})
+WriteResult({ "nRemoved" : 5 })
+> db.user.find()
+> db.user.find()
+{ "_id" : ObjectId("5f59f68877f0ed3e552480c7"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:48:56.673Z") }
+> db.user.remove({name: "abc"}, 1)
+WriteResult({ "nRemoved" : 1 })
+> db.user.find()
+> db.user.find()
+{ "_id" : ObjectId("5f59f6b62806af2d27f3c566"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:49:42.752Z") }
+{ "_id" : ObjectId("5f59f6c35ec12a273e1fa02a"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:49:55.942Z") }
+{ "_id" : ObjectId("5f59f6cdc272556c1c9750eb"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:50:05.019Z") }
+> db.user.remove({name: "abc"}, 1)
+WriteResult({ "nRemoved" : 1 })
+> db.user.find()
+{ "_id" : ObjectId("5f59f6c35ec12a273e1fa02a"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:49:55.942Z") }
+{ "_id" : ObjectId("5f59f6cdc272556c1c9750eb"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:50:05.019Z") }
+> db.user.find()
+{ "_id" : ObjectId("5f59f6c35ec12a273e1fa02a"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:49:55.942Z") }
+{ "_id" : ObjectId("5f59f6cdc272556c1c9750eb"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:50:05.019Z") }
+{ "_id" : ObjectId("5f59f6ef276be77c65108765"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:50:39.721Z") }
+> db.user.remove({name: "abc"}, 2)
+WriteResult({ "nRemoved" : 1 })
+> db.user.find()
+{ "_id" : ObjectId("5f59f6cdc272556c1c9750eb"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:50:05.019Z") }
+{ "_id" : ObjectId("5f59f6ef276be77c65108765"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:50:39.721Z") }
+> db.user.remove({createdDate: "2020-09-10T09:50:05.019Z"}, 1)
+WriteResult({ "nRemoved" : 0 })
+> db.user.remove({createdDate: "2020-09-10T09:50:05.019Z"})
+WriteResult({ "nRemoved" : 0 })
+> db.user.remove({createdDate: 2020-09-10T09:50:05.019Z})
+uncaught exception: SyntaxError: identifier starts immediately after numeric literal :
+@(shell):1:37
+> db.user.remove({createdDate: ISODate("2020-09-10T09:50:05.019Z")})
+WriteResult({ "nRemoved" : 1 })
+> db.user.find()
+{ "_id" : ObjectId("5f59f6ef276be77c65108765"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:50:39.721Z") }
+> use admin
+switched to db admin
+> db.find()
+uncaught exception: TypeError: db.find is not a function :
+@(shell):1:1
+>
+>
+> use testdb
+switched to db testdb
+> show collections
+user
+> use admin
+switched to db admin
+> show collections
+system.version
+> system.version.find()
+uncaught exception: ReferenceError: system is not defined :
+@(shell):1:1
+> db.system.version.find()
+{ "_id" : "featureCompatibilityVersion", "version" : "4.4" }
+> show db
+uncaught exception: Error: don't know how to show [db] :
+shellHelper.show@src/mongo/shell/utils.js:1191:11
+shellHelper@src/mongo/shell/utils.js:819:15
+@(shellhelp2):1:1
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+testdb  0.000GB
+> use testdb
+switched to db testdb
+> show collections
+user
+> db.user.find()
+{ "_id" : ObjectId("5f59f6ef276be77c65108765"), "name" : "abc", "age" : 10, "createdDate" : ISODate("2020-09-10T09:50:39.721Z") }
+>
